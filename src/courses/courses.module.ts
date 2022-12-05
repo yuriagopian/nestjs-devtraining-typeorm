@@ -1,3 +1,4 @@
+import { Tag } from './entities/tag.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CoursesController } from './courses.controller';
@@ -8,6 +9,7 @@ import { Course } from './entities/course.entity';
     imports: [
         TypeOrmModule.forFeature([
             Course,
+            Tag
         ])
     ],
     controllers: [CoursesController],

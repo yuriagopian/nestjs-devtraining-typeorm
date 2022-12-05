@@ -51,6 +51,16 @@ docker run --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 docker start postgres
 ```
 
+## Generate Class entity
+
+```bash
+# verify structure
+$ nest g class courses/entities tag.entity --no-spec --dry-run
+
+# generate entity
+$ nest g class courses/entities tag.entity --no-spec --dry-run
+```
+
 ## Test
 
 ```bash
