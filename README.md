@@ -43,6 +43,12 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# if not exists postgres image
+docker run --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+
+# if exists
+docker start postgres
 ```
 
 ## Test
