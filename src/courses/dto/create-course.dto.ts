@@ -1,9 +1,11 @@
+import { Tag } from './../entities/tag.entity';
 import { IsNumber, IsOptional, IsString, } from "class-validator";
 
 export class CreateCourseDto {
     @IsNumber()
     @IsOptional()
     readonly id: number;
+
 
     @IsString()
     readonly name: string;
