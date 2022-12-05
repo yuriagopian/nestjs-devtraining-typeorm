@@ -10,7 +10,7 @@ export class CoursesService {
     constructor(@InjectRepository(Course) private readonly courseRepository: Repository<Course>) { }
 
     findAll() {
-        return this.courseRepository.find;
+        return this.courseRepository.find();
     }
 
     findOne(id: string) {
@@ -19,6 +19,8 @@ export class CoursesService {
         if (!course) {
             throw new NotFoundException(`Course ID ${id} not found`)
         }
+
+        return course;
     }
 
     create(createCourseDTO: CreateCourseDto) {

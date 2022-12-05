@@ -7,11 +7,9 @@ import { Body, Controller, Get, HttpCode, Param, Post, HttpStatus, Res, Patch, D
 export class CoursesController {
     constructor(private readonly coursesService: CoursesService) { }
 
-    // tratando status code em caso de sucesso
     @Get()
-    findAll(@Res() response) {
-        const findAll = this.coursesService.findAll()
-        return response.status(200).send(findAll)
+    findAll() {
+        return this.coursesService.findAll();
     }
 
     @Get(':id')
