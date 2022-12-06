@@ -19,10 +19,14 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migration:run": "npm run typeorm -- -d ./typeOrm.config.ts migration:run",
+    "migration:run": "npx typeorm -d ./typeOrm.config.ts migration:run",
+    "typeorm": "ts-node ./node_modules/typeorm/cli",
     "migration:revert": "npm run typeorm -- -d ./typeOrm.config.ts migration:revert",
     "migration:create": "npx typeorm migration:create ./src/migrations/$npm_config_name",
-    "send": "echo \"send email to $1 @ $2 \""
+    "typeorm:run-migrations": "npm run typeorm migration:run -- -d ./typeOrm.config.ts",
+    "typeorm:revert-migration": "npm run typeorm -- -d ./typeOrm.config.ts migration:revert",
+    "typeorm:generate-migration": "npm run typeorm -- -d ./typeOrm.config.ts migration:generate ./migrations/$npm_config_name",
+    "typeorm:create-migration": "npm run typeorm -- migration:create ./migrations/$npm_config_name"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",

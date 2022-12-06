@@ -76,12 +76,15 @@ $ npm run test:cov
 
 ## Run Migration
 
+https://wanago.io/2022/07/25/api-nestjs-database-migrations-typeorm/
+
 ```bash
 $ npx typeorm migration:create ./src/migrations/CourseRefatoring
 
 or
 
 $npm run migration:create --name=CourseRefactoring
+
 
 ```
 
