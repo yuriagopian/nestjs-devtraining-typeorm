@@ -1,4 +1,3 @@
-import { Tag } from './../entities/tag.entity';
 import { IsNumber, IsOptional, IsString, } from "class-validator";
 
 export class CreateCourseDto {

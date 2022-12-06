@@ -7,13 +7,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [CoursesModule, TypeOrmModule.forRoot({
     type: 'postgres',
-    host: "localhost",
+    host: "db", // docker || local || "localhost" || "db"
     port: 5432,
     username: "postgres",
     password: "docker",
-    database: "postgres",
+    database: "cursonestjs", // docker || local|| "postgres" || "cursonestjs"
     autoLoadEntities: true,
-    synchronize: true
+    synchronize: false, // false to production, true to local
   })],
   controllers: [AppController,],
   providers: [AppService],

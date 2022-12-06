@@ -4,6 +4,10 @@
 
 .env
 
+# Docker
+.docker/*
+!.docker/entrypoint.sh
+!.docker/postgres/Dockerfile
 # Logs
 logs
 *.log
