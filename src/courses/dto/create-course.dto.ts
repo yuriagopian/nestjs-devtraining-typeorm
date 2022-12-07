@@ -3,7 +3,7 @@ import { IsNumber, IsOptional, IsString, } from "class-validator";
 export class CreateCourseDto {
     @IsNumber()
     @IsOptional()
-    readonly id: number;
+    readonly id: string;
 
 
     @IsString()

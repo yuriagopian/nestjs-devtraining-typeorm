@@ -12,8 +12,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     username: "postgres",
     password: "docker",
     database: "cursonestjs", // docker || local|| "postgres" || "cursonestjs"
-    autoLoadEntities: true,
+    autoLoadEntities: false,
     synchronize: false, // false to production, true to local
+    entities: [__dirname + '/**/*.entity.ts']
   })],
   controllers: [AppController,],
   providers: [AppService],
