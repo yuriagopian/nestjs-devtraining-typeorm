@@ -25,7 +25,10 @@ describe('CoursesService', () => {
           provide: getRepositoryToken(Course),
           useValue: createMockRepository(),
         },
-        { provide: getRepositoryToken(Tag), useValue: createMockRepository() },
+        {
+          provide: getRepositoryToken(Tag),
+          useValue: createMockRepository(),
+        },
       ],
     }).compile();
 
@@ -55,6 +58,7 @@ describe('CoursesService', () => {
           await service.findOne(courseId);
         } catch (error) {
           expect(error).toBeInstanceOf(NotFoundException);
+          expect(error.message).toEqual(`Course ID ${courseId} not found`);
         }
       });
     });
