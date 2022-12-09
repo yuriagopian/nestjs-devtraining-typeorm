@@ -19,10 +19,12 @@ describe('Courses: /courses (e2e)', () => {
     await app.close();
   });
 
-  it('/ (GET)', () => {
+  it.todo('Create POST /courses', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .post('/courses')
       .expect(200)
       .expect('Hello World!');
   });
+
+  it.todo('Create PUT /courses');
 });
