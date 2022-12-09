@@ -1,5 +1,13 @@
-import { BeforeInsert, Column, CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Course } from "./course.entity";
+import {
+    BeforeInsert,
+    Column,
+    CreateDateColumn,
+    Entity,
+    ManyToMany,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Course } from './course.entity';
+
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity('tags')
@@ -8,20 +16,20 @@ export class Tag {
     id: string;
 
     @Column()
-    name: string
+    name: string;
 
     @ManyToMany(() => Course, (course) => course.tags)
     courses: Course[];
 
     @CreateDateColumn({ type: 'timestamp' })
-    created_at: Date
+    created_at: Date;
 
     @BeforeInsert()
-    generatedID() {
+    generatedId() {
         if (this.id) {
-            return
+            return;
         }
 
-        this.id = uuidv4()
+        this.id = uuidv4();
     }
 }
