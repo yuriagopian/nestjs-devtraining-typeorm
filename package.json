@@ -20,7 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "pretest:e2e": "docker-compose up -d dbtest",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "posttest:e2e": "docker-compose stop dbtest && docker-comose rm -f dbtest",
+    "posttest:e2e": "docker-compose stop dbtest && docker-compose rm -f dbtest",
     "migration:run": "npx typeorm -d ./typeOrm.config.ts migration:run",
     "typeorm": "ts-node ./node_modules/typeorm/cli",
     "migration:revert": "npm run typeorm -- -d ./typeOrm.config.ts migration:revert",
