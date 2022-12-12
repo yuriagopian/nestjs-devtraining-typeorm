@@ -18,14 +18,14 @@ export class CoursesService {
   // @InjectRepository(Tag) private readonly tagRepository: Repository<Tag>,
   // {}
 
-  findAll() {
+  async findAll() {
     return this.courseRepository.find({
       relations: ['tags'],
     });
   }
 
-  findOne(id: string) {
-    const course = this.courseRepository.findOne({
+  async findOne(id: string) {
+    const course = await this.courseRepository.findOne({
       where: {
         id,
       },

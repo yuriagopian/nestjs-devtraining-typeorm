@@ -5,13 +5,6 @@ const configService = new ConfigService();
 import { config } from 'dotenv';
 
 config();
-console.log(
-  configService.get('DB_HOST'),
-  configService.get('DB_PORT'),
-  configService.get('DB_USERNAME'),
-  configService.get('DB_PASSWORD'),
-  configService.get('DATABASE_NAME'),
-);
 
 export const databaseProviders = [
   {
