@@ -53,7 +53,17 @@ describe('Courses: /courses (e2e)', () => {
     return request(app.getHttpServer())
       .post('/courses')
       .send(course as CreateCourseDto)
-      .expect(HttpStatus.CREATED);
+      .expect(HttpStatus.CREATED)
+      .then(({ body }) => {
+        const expectedCourse = jasmine.objectContaining({
+          ...course,
+          tags: jasmine.arrayContaining(
+            course.tags.map((name) => jasmine.objectContaining({ name })),
+          ),
+        });
+
+        expect(body).toEqual(expectedCourse);
+      });
   });
 
   it.todo('Create PUT /courses');
