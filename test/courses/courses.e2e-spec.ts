@@ -1,11 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { HttpStatus, INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { CoursesModule } from '../../src/courses/courses.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CreateCourseDto } from '../../src/courses/dto/create-course.dto';
 
 describe('Courses: /courses (e2e)', () => {
   let app: INestApplication;
+
+  const course: CreateCourseDto = {
+    name: 'Nestjs',
+    description: 'Criando apis restfull com nest',
+    tags: ['nestjs', 'typeorm', 'typescript'],
+    price: 55.0,
+  };
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -13,13 +21,13 @@ describe('Courses: /courses (e2e)', () => {
         CoursesModule,
         TypeOrmModule.forRoot({
           type: 'postgres',
-          host: 'localhost', // docker || local || "localhost" || "db"
+          host: 'localhost',
           port: 5433,
           username: 'postgres',
           password: 'docker',
-          database: 'testdb', // docker || local|| "postgres" || "cursonestjs"
+          database: 'testdb',
           autoLoadEntities: true,
-          synchronize: true, // false to production, true to local
+          synchronize: true,
           entities: [__dirname + '/**/*.entity.ts'],
         }),
       ],
@@ -41,15 +49,12 @@ describe('Courses: /courses (e2e)', () => {
     await app.close();
   });
 
-  it.todo(
-    'Create POST /courses',
-    //  () => {
-    // return request(app.getHttpServer());
-    // .post('/courses')
-    // .expect(200)
-    // .expect('Hello World!');
-    // }
-  );
+  it('Create POST /courses', () => {
+    return request(app.getHttpServer())
+      .post('/courses')
+      .send(course as CreateCourseDto)
+      .expect(HttpStatus.CREATED);
+  });
 
   it.todo('Create PUT /courses');
 });
