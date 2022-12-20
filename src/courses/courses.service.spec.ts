@@ -96,28 +96,52 @@ describe('CoursesService', () => {
     expect(expectedOutputCourse).toStrictEqual(courses);
   });
 
-  // describe('findOne', () => {
-  //   describe('Get Course by id', () => {
-  //     it('should return an object course', async () => {
-  //       const courseId = '1';
-  //       const expectedCourse = {};
-  //       courseRepository.findOne.mockReturnValue(expectedCourse);
-  //       const course = await service.findOne(courseId);
+  it('should get a course', async () => {
+    const expectedOutputTags = [
+      {
+        id,
+        name: 'nestjs',
+        created_at: date,
+      },
+    ];
 
-  //       expect(course).toEqual(expectedCourse);
-  //     });
+    const expectedOutputCourse = [
+      {
+        id,
+        name: 'test',
+        description: 'test description',
+        created_at: date,
+        tags: expectedOutputTags,
+        price: 50,
+      },
+    ];
 
-  //     it('should return NotFoundException', async () => {
-  //       const courseId = '1';
-  //       courseRepository.findOne.mockReturnValue(undefined);
+    const mockCourseRepository = {
+      findOne: jest.fn().mockReturnValue(Promise.resolve(expectedOutputCourse)),
+    };
 
-  //       try {
-  //         await service.findOne(courseId);
-  //       } catch (error) {
-  //         expect(error).toBeInstanceOf(NotFoundException);
-  //         expect(error.message).toEqual(`Course ID ${courseId} not found`);
-  //       }
-  //     });
-  //   });
-  // });
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository;
+
+    const course = await service.findOne(id);
+
+    expect(mockCourseRepository.findOne).toHaveBeenCalled();
+    expect(expectedOutputCourse).toStrictEqual(course);
+  });
+
+  it('should return NotFoundException', async () => {
+    const mockCourseRepository = {
+      findOne: jest.fn().mockReturnValue(undefined),
+    };
+
+    //@ts-expect-error defined part of methods
+    service['courseRepository'] = mockCourseRepository;
+
+    try {
+      await service.findOne(id);
+    } catch (error) {
+      expect(error).toBeInstanceOf(NotFoundException);
+      expect(error.message).toEqual(`Course ID ${id} not found`);
+    }
+  });
 });
